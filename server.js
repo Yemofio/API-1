@@ -76,6 +76,7 @@ app.use(validateAPIKey);
   res.json(products);
 });
 
+app.use('/api', require('./search'));
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
