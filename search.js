@@ -22,7 +22,7 @@ router.post('/search', (req, res) => {
   // Perform the search operation based on the query and filters
   // Replace this with implementation using remote database server
 
-  // Example response data
+  // Example response data 
   const results = [
     { id: '1', name: 'Product A', description: 'Description of Product A' },
     { id: '2', name: 'Product B', description: 'Description of Product B' },
