@@ -21,17 +21,49 @@ router.post('/search', (req, res) => {
   }
 
   // Extract the query and filters from the request body
-  const { query, filters } = req.body;
+const { query, filters } = req.body;
 
-  // Perform the search operation based on the query and filters
-  // Replace this with implementation using a remote database server
+// Perform the search operation based on the query and filters
+// Replace this with implementation using a remote database server
 
-  // Example response data 
-  const results = [
-    { id: '1', name: 'Product A', description: 'Description of Product A' },
-    { id: '2', name: 'Product B', description: 'Description of Product B' },
-    { id: '3', name: 'Product C', description: 'Description of Product C' }
-  ];
+// Example response data 
+const results = [
+  { id: '1', name: 'Product A', description: 'Description of Product A' },
+  { id: '2', name: 'Product B', description: 'Description of Product B' },
+  { id: '3', name: 'Product C', description: 'Description of Product C' }
+];
+
+// Placeholder implementation using a remote database server
+// Assuming there is a 'products' collection/table in the remote database
+const remoteDB = require('remote-db'); // Example remote database module
+
+remoteDB.connect('your-remote-db-url', 'your-credentials')
+  .then(() => {
+    // Assuming there is a 'search' method to perform the search operation
+    return remoteDB.search('products', query, filters);
+  })
+  .then((searchResults) => {
+    // Assuming the search results are returned as an array of objects
+    const results = searchResults.map((result) => ({
+      id: result.id,
+      name: result.name,
+      description: result.description,
+    }));
+
+    // Validate the response payload against the search result schema
+    const searchResultValidationResult = validateSchema({ results }, searchResultSchema);
+    if (!searchResultValidationResult.valid) {
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+
+    // Return the search results
+    res.json({ results });
+  })
+  .catch((error) => {
+    console.error('Error searching in the remote database:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  });
+
 
   // Validate the response payload against the search result schema
   const searchResultValidationResult = validateSchema({ results }, searchResultSchema);
