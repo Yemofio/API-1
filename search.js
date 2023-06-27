@@ -66,11 +66,12 @@ remoteDB.connect('your-remote-db-url', 'your-credentials')
 
 
   // Validate the response payload against the search result schema
-  const searchResultValidationResult = validateSchema({ results }, searchResultSchema);
-  if (!searchResultValidationResult.valid) {
-    // If the response payload is invalid, return a 500 Internal Server Error response
-    return res.status(500).json({ error: 'Internal Server Error' });
-  }
+const searchResultValidationResult = validateSchema({ results }, searchResultSchema);
+if (!searchResultValidationResult.valid) {
+  // If the response payload is invalid, return a 500 Internal Server Error response
+  return res.status(500).json({ error: 'Internal Server Error' });
+}
+
 
   // Return the search results
   res.json({ results });
